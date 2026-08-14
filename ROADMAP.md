@@ -13,6 +13,9 @@ summary for anyone who doesn't want to scroll through them.
 
 Two rounds of work that are done but not released yet:
 
+- **🗓️ CalDAV calendars** — connect Nextcloud, Baïkal, Radicale, Synology,
+  mailbox.org or iCloud with server URL and an app password; the calendars
+  themselves are discovered, no OAuth app to register.
 - **🔒 Security and behaviour** — the database port is closed and the app
   refuses to start without a session secret instead of quietly letting
   everyone in; `/api/ha/action` now only reaches entities that are actually
@@ -36,7 +39,6 @@ Scoped issues that are likely to land in upcoming 1.3.x patches:
   source from an automation is what's left
 - **🎵 Fullscreen media browser + search** for Music Assistant, based on
   @schmierlappe's module ([#57](https://github.com/jeremiaa/magic-frame/issues/57))
-- **📷 HA-triggered camera in fullscreen** instead of card size ([#41](https://github.com/jeremiaa/magic-frame/issues/41))
 - **🔔 State-based colouring for notification tiles**, like the HA entity
   widget has ([#47](https://github.com/jeremiaa/magic-frame/issues/47))
 

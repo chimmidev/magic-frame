@@ -269,6 +269,10 @@ tap-for-fullscreen.
 | `refreshIntervalSec` | 5 | Snapshot mode only. |
 | `aspectRatio` | `auto` | `auto` lets the picture keep its own shape; `16:9`, `4:3` and `1:1` fill the tile and crop. |
 | `clickFullscreen` | on | Tapping anywhere in the tile opens the picture full screen. Tap again, or the ✕, to close. |
+| `fullscreenOnTrigger` | off | A Home Assistant entity pops the camera full screen by itself — see below. |
+| `fullscreenTriggerEntity` | — | The entity that does it. Empty = the widget's own visibility trigger. |
+| `fullscreenTriggerState` | — | The state that counts as "now". Empty = any active state. |
+| `fullscreenSeconds` | — | How long it stays up. `0` = as long as the trigger is active; empty = the auto-hide seconds from the Layout tab. |
 | `caption` | — | The corner chip. Empty = no chip. |
 
 ### Which mode to pick
@@ -295,6 +299,28 @@ WebRTC. Switching back to MJPEG is the fix.
 
 Full screen is drawn over the whole page, not inside the tile, so it really does
 fill the screen even when the widget is a small square in a corner.
+
+### The doorbell case: full screen without a tap
+
+A wall display is usually across the room, and the one moment you want the front
+door camera is the moment nobody is standing at the display. **Open fullscreen
+automatically on an HA trigger** (`fullscreenOnTrigger`) does that: a doorbell,
+motion or person-detection entity pops the camera over wallpaper and gallery on
+its own, and the display returns to its calm view afterwards.
+
+1. Tick **Open fullscreen automatically on an HA trigger** on the camera widget.
+2. Leave the entity empty to reuse the widget's own visibility trigger — the one
+   under `Layout → Visibility → Automatically via Home Assistant`. A camera that
+   is hidden until the doorbell rings needs nothing else.
+3. Set an entity (and optionally a state) here instead when the camera sits on
+   the display permanently and should only *jump* to full screen.
+4. **Fullscreen duration in sec.** decides how long it stays. A doorbell is often
+   "on" for a second or two, which would flash the picture and take it away
+   again; a duration keeps it up regardless. `0` means it stays as long as the
+   entity is active, and a tap closes it by hand at any time.
+
+This is independent of `clickFullscreen`: a camera that must not react to taps at
+all can still be popped open by its trigger.
 
 ## Sensor
 
